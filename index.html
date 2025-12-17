@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>株式会社YOU | 新宿・大久保での理想のお部屋探しをサポート</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">YOU</span>
+        <span class="brand-sub">REAL ESTATE</span>
+      </a>
+      <nav class="site-nav">
+        <a href="#company">COMPANY</a>
+        <a class="nav-cta" href="tel:0368206281">03-6820-6281</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="hero-bg">
+        <img src="hero-view.png" alt="View" class="hero-img">
+        <div class="hero-mask"></div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">Rent & Life Support</span>
+          <h1 class="hero-title">「ここに住みたい」が、<br>きっと見つかる。</h1>
+          <p class="hero-lead">新宿・大久保エリアを中心に、東京都内のあなたにぴったりの住まいをご提案。<br>納得のお部屋探しから、新しい生活のスタートまで寄り添います。</p>
+          <div class="hero-btns">
+            <a href="tel:0368206281" class="btn-primary">お部屋探しを相談する</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="company">
+      <div class="container">
+        <div class="reveal">
+          <h2 class="section-title">COMPANY INFO</h2>
+          <div class="company-grid">
+            <div class="info-list">
+              <div class="info-item"><strong>商号</strong><span>株式会社YOU</span></div>
+              <div class="info-item"><strong>代表者</strong><span>稲垣 雄也</span></div>
+              <div class="info-item"><strong>所在地</strong><span>〒169-0072 東京都新宿区大久保1丁目12-4 ASS第二ビル3F</span></div>
+              <div class="info-item"><strong>電話番号</strong><span>03-6820-6281</span></div>
+              <div class="info-item"><strong>宅建免許</strong><span>東京都知事 (1) 第112339号</span></div>
+            </div>
+            <div class="map-area">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.06249195048!2d139.70273767675713!3d35.70130637257129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d2642270905%3A0x6734c76763428d05!2z44CSMTY5LTAwNzIg5p2x5Lqs6YO95paw5a6_5Yy65aSn5LmF5L-d77yR5LiB55uu77yR77yS4oiS77yUIEFTU-esrDLjg5Pjg6svM0Y!5e0!3m2!1sja!2sjp!4v1710000000000!5m2!1sja!2sjp" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="copyright">© 2025 YOU Co., Ltd. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      document.querySelector('.hero-content').classList.add('active');
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
