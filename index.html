@@ -1,84 +1,446 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>株式会社YOU | 新宿・大久保での理想のお部屋探しをサポート</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./src/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社YOU | Premium Real Estate Tokyo</title>
+    
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0b0d10; /* 限りなく黒に近いミッドナイトネイビー */
+            --text-color: #f5f5f5;
+            --sub-text-color: #9a9a9a;
+            --accent-color: #c5a47e; /* シャンパンゴールド */
+            --border-color: #2a2d35;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Zen Old Mincho', serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        a:hover { color: var(--accent-color); }
+        ul { list-style: none; padding: 0; margin: 0; }
+
+        /* Smooth Scroll */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+
+        /* Typography Helper */
+        .en-font { font-family: 'Cormorant Garamond', serif; }
+        .gold { color: var(--accent-color); }
+        
+        /* Layout */
+        .container {
+            width: 85%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 15vh 0;
+            position: relative;
+        }
+
+        /* --- Loader --- */
+        .loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: #050505;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-color);
+        }
+        .loader-logo {
+            font-size: 2rem;
+            letter-spacing: 0.3em;
+            opacity: 0;
+        }
+
+        /* --- Header/Nav --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+        }
+        .logo { font-size: 1.2rem; letter-spacing: 0.2em; font-weight: 700; }
+        .menu-btn { font-size: 0.9rem; letter-spacing: 0.1em; cursor: pointer; }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+        }
+        .hero-bg::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 13, 16, 0.4); /* 画像を少し暗くする */
+        }
+        .hero-img {
+            width: 100%; height: 120%;
+            object-fit: cover;
+            /* 高級マンション・ラウンジのイメージ */
+            background-image: url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop');
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            width: 100%;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .hero-main-text {
+            font-size: clamp(3rem, 9vw, 8rem);
+            line-height: 0.9;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+        .hero-main-text span { display: block; overflow: hidden; }
+        .hero-sub {
+            writing-mode: vertical-rl;
+            font-size: 0.9rem;
+            letter-spacing: 0.3em;
+            height: 200px;
+            border-right: 1px solid rgba(255,255,255,0.3);
+            padding-right: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Concept Section --- */
+        .concept-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            align-items: center;
+        }
+        @media (max-width: 768px) { .concept-layout { grid-template-columns: 1fr; } }
+
+        .section-num {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 2rem;
+        }
+        
+        .big-p {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+        }
+
+        .desc-p {
+            color: var(--sub-text-color);
+            line-height: 2.2;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        /* --- Service/Listing --- */
+        .service-list {
+            border-top: 1px solid var(--border-color);
+        }
+        .service-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .service-item:hover {
+            padding-left: 2rem;
+            background: linear-gradient(90deg, rgba(197, 164, 126, 0.05) 0%, transparent 100%);
+        }
+        .svc-name {
+            font-size: 2.5rem;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .svc-desc {
+            font-size: 0.9rem;
+            color: var(--sub-text-color);
+        }
+
+        /* --- Company Data (Certificate Style) --- */
+        .cert-container {
+            background: #11141a;
+            padding: 5rem;
+            border: 1px solid #333;
+            position: relative;
+        }
+        @media (max-width: 768px) { .cert-container { padding: 2rem; } }
+
+        .cert-container::before {
+            content: '';
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid #222;
+            pointer-events: none;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 2rem;
+        }
+        @media (max-width: 600px) { .data-grid { grid-template-columns: 1fr; gap: 0.5rem; } }
+
+        .data-label { color: var(--accent-color); font-size: 0.85rem; letter-spacing: 0.1em; }
+        .data-val { font-size: 1.1rem; letter-spacing: 0.05em; }
+        
+        .license-box {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: rgba(197, 164, 126, 0.1);
+            border: 1px solid var(--accent-color);
+            display: inline-block;
+        }
+        .license-num { font-family: 'Cormorant Garamond'; font-size: 1.5rem; color: var(--accent-color); }
+
+        /* --- Footer --- */
+        footer {
+            padding: 5rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-logo { font-size: 3rem; font-family: 'Cormorant Garamond'; margin-bottom: 2rem; display: block; }
+
+    </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="#">
-        <span class="brand-mark">YOU</span>
-        <span class="brand-sub">REAL ESTATE</span>
-      </a>
-      <nav class="site-nav">
-        <a href="#company">COMPANY</a>
-        <a class="nav-cta" href="tel:0368206281">03-6820-6281</a>
-      </nav>
+
+    <div class="loader">
+        <div class="loader-logo en-font">YOU CORPORATION</div>
     </div>
-  </header>
 
-  <main>
-    <section class="hero-section">
-      <div class="hero-bg">
-        <img src="hero-view.png" alt="View" class="hero-img">
-        <div class="hero-mask"></div>
-      </div>
-      <div class="container">
-        <div class="hero-content">
-          <span class="hero-tag">Rent & Life Support</span>
-          <h1 class="hero-title">「ここに住みたい」が、<br>きっと見つかる。</h1>
-          <p class="hero-lead">新宿・大久保エリアを中心に、東京都内のあなたにぴったりの住まいをご提案。<br>納得のお部屋探しから、新しい生活のスタートまで寄り添います。</p>
-          <div class="hero-btns">
-            <a href="tel:0368206281" class="btn-primary">お部屋探しを相談する</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <header>
+        <div class="logo en-font">YOU.</div>
+        <div class="menu-btn en-font">MENU</div>
+    </header>
 
-    <section class="section" id="company">
-      <div class="container">
-        <div class="reveal">
-          <h2 class="section-title">COMPANY INFO</h2>
-          <div class="company-grid">
-            <div class="info-list">
-              <div class="info-item"><strong>商号</strong><span>株式会社YOU</span></div>
-              <div class="info-item"><strong>代表者</strong><span>稲垣 雄也</span></div>
-              <div class="info-item"><strong>所在地</strong><span>〒169-0072 東京都新宿区大久保1丁目12-4 ASS第二ビル3F</span></div>
-              <div class="info-item"><strong>電話番号</strong><span>03-6820-6281</span></div>
-              <div class="info-item"><strong>宅建免許</strong><span>東京都知事 (1) 第112339号</span></div>
+    <main>
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-img" data-speed="0.5"></div>
             </div>
-            <div class="map-area">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.06249195048!2d139.70273767675713!3d35.70130637257129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d2642270905%3A0x6734c76763428d05!2z44CSMTY5LTAwNzIg5p2x5Lqs6YO95paw5a6_5Yy65aSn5LmF5L-d77yR5LiB55uu77yR77yS4oiS77yUIEFTU-esrDLjg5Pjg6svM0Y!5e0!3m2!1sja!2sjp!4v1710000000000!5m2!1sja!2sjp" 
-                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-              </iframe>
+            <div class="hero-content">
+                <h1 class="hero-title en-font hero-main-text">
+                    <span class="reveal-text">Curated</span>
+                    <span class="reveal-text">Living for</span>
+                    <span class="reveal-text gold">YOU.</span>
+                </h1>
+                <div class="hero-sub reveal-opacity">
+                    東京に、あなただけの聖域を。
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p class="copyright">© 2025 YOU Co., Ltd. All Rights Reserved.</p>
-    </div>
-  </footer>
+        <section class="container">
+            <span class="section-num">01 / Concept</span>
+            <div class="concept-layout">
+                <div>
+                    <h2 class="big-p reveal-up">
+                        物件を探すのではない。<br>
+                        <span class="gold">「生き方」</span>を選ぶのだ。
+                    </h2>
+                </div>
+                <div>
+                    <p class="desc-p reveal-up">
+                        株式会社YOUは、東京を中心とした不動産のスペシャリストです。
+                        私たちが提供するのは、単なる居住空間の斡旋ではありません。
+                        お客様一人ひとりのライフスタイル、将来のビジョン、そして美意識。
+                        それらすべてが調和する「理想の居場所」との出会いをプロデュースします。<br><br>
+                        都心の隠れ家から、ハイグレードなタワーレジデンスまで。
+                        信頼と実績に裏打ちされた独自のネットワークで、
+                        あなただけの特別な一室をご提案いたします。
+                    </p>
+                </div>
+            </div>
+        </section>
 
-  <script>
-    window.addEventListener('load', () => {
-      document.querySelector('.hero-content').classList.add('active');
-    });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('active');
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+        <section class="container">
+            <span class="section-num">02 / Services</span>
+            <div class="service-list">
+                <div class="service-item reveal-row">
+                    <span class="svc-name en-font">Premium Rental</span>
+                    <span class="svc-desc">高級賃貸仲介・コンシェルジュ</span>
+                </div>
+                <div class="service-item reveal-row">
+                    <span class="svc-name en-font">Real Estate Sales</span>
+                    <span class="svc-desc">不動産売買・資産運用</span>
+                </div>
+                <div class="service-item reveal-row">
+                    <span class="svc-name en-font">Property Management</span>
+                    <span class="svc-desc">プロパティマネジメント</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <span class="section-num">03 / Company Profile</span>
+            
+            <div class="cert-container reveal-up">
+                <div style="text-align: center; margin-bottom: 4rem;">
+                    <h3 class="en-font" style="font-size: 2rem; margin-bottom: 0.5rem;">CORPORATE DATA</h3>
+                    <p style="font-size: 0.8rem; letter-spacing: 0.2em; opacity: 0.6;">会社概要・許認可情報</p>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-label">会社名</div>
+                    <div class="data-val">株式会社 YOU</div>
+                </div>
+                
+                <div class="data-grid">
+                    <div class="data-label">代表取締役</div>
+                    <div class="data-val">稲垣 雄也 <span class="en-font" style="font-size:0.9em; opacity:0.6; margin-left:1em;">Yuya Inagaki</span></div>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-label">所在地</div>
+                    <div class="data-val">
+                        〒169-0072<br>
+                        東京都新宿区大久保1丁目12-4 ASS第二ビル 3F
+                    </div>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-label">電話番号</div>
+                    <div class="data-val en-font">03-6820-6281</div>
+                </div>
+
+                <div class="data-grid">
+                    <div class="data-label">事業内容</div>
+                    <div class="data-val">不動産賃貸仲介・売買・管理、リノベーション企画</div>
+                </div>
+                
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; margin-top: 3rem;">
+                    <div class="license-box">
+                        <div style="font-size: 0.7rem; margin-bottom: 0.5rem;">宅地建物取引業免許証番号</div>
+                        <div class="license-num">東京都知事 (1) 第112339号</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 0.8rem; margin-bottom: 0.5rem; opacity: 0.7;">加盟団体</div>
+                        <div style="font-weight: 500;">公益社団法人 不動産保証協会</div>
+                        <div style="font-weight: 500;">公益社団法人 全日本不動産協会</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="margin-top: 5rem; width: 100%; height: 400px; filter: grayscale(100%); opacity: 0.8;">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.967876873587!2d139.7047893!3d35.7024323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d2f6c0d8b7f%3A0x123456789abcdef!2z5p2x5Lqs6YO95paw5a6_5Yy65aSn5LmF5L-d77yR5LiB55uu77yR77yS4oiS77yU!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+        </section>
+
+        <section class="container" style="text-align: center; padding: 20vh 0;">
+            <h2 class="en-font" style="font-size: 4rem; margin-bottom: 2rem;">Contact Us</h2>
+            <p style="margin-bottom: 4rem; opacity: 0.7;">
+                未公開物件も含め、<br>
+                お客様のご要望に合わせた最適なプランをご提案いたします。
+            </p>
+            <a href="#" style="border: 1px solid #fff; padding: 1.5rem 5rem; border-radius: 2px; letter-spacing: 0.1em; position: relative; overflow: hidden; display: inline-block;">
+                INQUIRY
+            </a>
+        </section>
+
+        <footer>
+            <span class="footer-logo">YOU.</span>
+            <small style="opacity: 0.5; letter-spacing: 0.1em;">&copy; YOU Co., Ltd. All Rights Reserved.</small>
+        </footer>
+
+    </main>
+
+    <script>
+        // 1. Initialize Lenis (Smooth Scroll)
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true
+        });
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 2. GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Loader
+        const tl = gsap.timeline();
+        tl.to(".loader-logo", { opacity: 1, duration: 1, ease: "power2.out" })
+          .to(".loader", { height: 0, duration: 1, ease: "power4.inOut", delay: 0.5 })
+          .from(".hero-main-text span", { y: 100, opacity: 0, duration: 1.5, stagger: 0.2, ease: "power4.out" }, "-=0.5")
+          .from(".hero-sub", { height: 0, opacity: 0, duration: 1, ease: "power2.out" }, "-=1");
+
+        // Parallax Effect
+        gsap.to(".hero-img", {
+            yPercent: 20,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // Text Reveal Up
+        gsap.utils.toArray('.reveal-up').forEach(el => {
+            gsap.from(el, {
+                y: 50, opacity: 0, duration: 1.2, ease: "power3.out",
+                scrollTrigger: { trigger: el, start: "top 85%" }
+            });
+        });
+
+        // Service Row Reveal
+        gsap.utils.toArray('.reveal-row').forEach((el, i) => {
+            gsap.from(el, {
+                x: -30, opacity: 0, duration: 1, delay: i * 0.1, ease: "power3.out",
+                scrollTrigger: { trigger: el, start: "top 90%" }
+            });
+        });
+
+    </script>
 </body>
 </html>
