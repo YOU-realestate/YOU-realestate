@@ -5,25 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>株式会社YOU | Premium Real Estate Tokyo</title>
 
-  <!-- SEO / OGP -->
-  <meta name="description" content="株式会社YOU｜東京の高級賃貸・売買・管理を、ライフスタイルから設計する不動産コンシェルジュ。" />
-  <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#0b0d10" />
-  <link rel="canonical" href="./" />
-  <meta property="og:title" content="株式会社YOU | Premium Real Estate Tokyo" />
-  <meta property="og:description" content="東京の高級賃貸・売買・管理を、ライフスタイルから設計する不動産コンシェルジュ。" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="ja_JP" />
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Zen+Old+Mincho:wght@400;500;700&display=swap" rel="stylesheet" />
-
-  <!-- JS (defer) -->
-  <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Zen+Old+Mincho:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     :root {
@@ -32,7 +23,6 @@
       --sub-text-color: #9a9a9a;
       --accent-color: #c5a47e;
       --border-color: #2a2d35;
-      --panel: #11141a;
     }
 
     * { box-sizing: border-box; }
@@ -51,12 +41,15 @@
     a:hover { color: var(--accent-color); }
     ul { list-style: none; padding: 0; margin: 0; }
 
+    /* Smooth Scroll */
     html.lenis { height: auto; }
     .lenis.lenis-smooth { scroll-behavior: auto; }
 
+    /* Typography Helper */
     .en-font { font-family: 'Cormorant Garamond', serif; }
     .gold { color: var(--accent-color); }
 
+    /* Layout */
     .container {
       width: 85%;
       max-width: 1400px;
@@ -68,10 +61,10 @@
       position: relative;
     }
 
-    /* Loader */
+    /* --- Loader --- */
     .loader {
       position: fixed;
-      inset: 0;
+      top: 0; left: 0; width: 100%; height: 100vh;
       background: #050505;
       z-index: 9999;
       display: flex;
@@ -85,7 +78,7 @@
       opacity: 0;
     }
 
-    /* Header */
+    /* --- Header/Nav --- */
     header {
       position: fixed;
       top: 0;
@@ -98,107 +91,9 @@
       mix-blend-mode: difference;
     }
     .logo { font-size: 1.2rem; letter-spacing: 0.2em; font-weight: 700; }
-    .menu-btn {
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      gap: 0.8rem;
-      align-items: center;
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 0.8rem 1.1rem;
-      background: rgba(0,0,0,0.15);
-      backdrop-filter: blur(6px);
-    }
-    .menu-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent-color);
-      display: inline-block;
-    }
+    .menu-btn { font-size: 0.9rem; letter-spacing: 0.1em; cursor: pointer; }
 
-    /* Menu Overlay */
-    .menu-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(5,5,5,0.92);
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    .menu-overlay.is-open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .menu-panel {
-      position: absolute;
-      top: 0; right: 0;
-      width: min(520px, 92vw);
-      height: 100%;
-      background: rgba(17,20,26,0.96);
-      border-left: 1px solid rgba(197,164,126,0.25);
-      padding: 2.5rem 2.2rem;
-      transform: translateX(12px);
-      transition: transform 0.25s ease;
-    }
-    .menu-overlay.is-open .menu-panel { transform: translateX(0); }
-    .menu-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2.5rem;
-    }
-    .menu-close {
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 0.6rem 0.9rem;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      background: rgba(255,255,255,0.03);
-    }
-    .menu-links a {
-      display: block;
-      padding: 1.3rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .menu-links .ttl {
-      font-size: 2rem;
-      font-family: 'Cormorant Garamond', serif;
-    }
-    .menu-links .sub {
-      font-size: 0.9rem;
-      color: var(--sub-text-color);
-      margin-top: 0.35rem;
-      letter-spacing: 0.08em;
-    }
-    .menu-foot {
-      margin-top: 2.2rem;
-      color: rgba(255,255,255,0.65);
-      font-size: 0.9rem;
-      line-height: 1.9;
-    }
-    .menu-cta {
-      margin-top: 1.2rem;
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.2rem;
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.03);
-      color: #fff;
-      letter-spacing: 0.08em;
-      font-size: 0.9rem;
-    }
-    .btn:hover { border-color: rgba(197,164,126,0.6); color: var(--accent-color); }
-
-    /* Hero */
+    /* --- Hero Section --- */
     .hero {
       height: 100vh;
       display: flex;
@@ -206,16 +101,17 @@
       position: relative;
       overflow: hidden;
     }
-    .hero-bg { position: absolute; inset: 0; z-index: -1; }
-    .hero-bg::after {
-      content: '';
+    .hero-bg {
       position: absolute;
-      inset: 0;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+    }
+    .hero-bg::after {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(11, 13, 16, 0.4);
     }
     .hero-img {
-      width: 100%;
-      height: 120%;
+      width: 100%; height: 120%;
       object-fit: cover;
       background-image: url('https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop');
       background-position: center;
@@ -247,7 +143,7 @@
       margin-bottom: 1rem;
     }
 
-    /* Concept */
+    /* --- Concept Section --- */
     .concept-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -277,7 +173,7 @@
       text-align: justify;
     }
 
-    /* Services */
+    /* --- Service/Listing --- */
     .service-list { border-top: 1px solid var(--border-color); }
     .service-item {
       border-bottom: 1px solid var(--border-color);
@@ -295,7 +191,7 @@
     .svc-name { font-size: 2.5rem; font-family: 'Cormorant Garamond', serif; }
     .svc-desc { font-size: 0.9rem; color: var(--sub-text-color); }
 
-    /* Company Data */
+    /* --- Company Data (Certificate Style) --- */
     .cert-container {
       background: #11141a;
       padding: 5rem;
@@ -334,80 +230,37 @@
     }
     .license-num { font-family: 'Cormorant Garamond'; font-size: 1.5rem; color: var(--accent-color); }
 
-    /* Contact (Form) */
-    .contact-wrap {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 3.2rem;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-      margin-top: 2rem;
-    }
-    @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
-
-    .field { display: flex; flex-direction: column; gap: 0.55rem; }
-    label { font-size: 0.85rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.75); }
-    input, textarea {
-      width: 100%;
-      padding: 1rem 1.1rem;
-      border-radius: 2px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(0,0,0,0.18);
-      color: #fff;
-      outline: none;
-      font-family: inherit;
-    }
-    input:focus, textarea:focus { border-color: rgba(197,164,126,0.6); }
-    textarea { min-height: 180px; resize: vertical; }
-
-    .contact-actions {
+    /* --- Contact CTA only --- */
+    .cta-row {
       display: flex;
       gap: 1rem;
-      flex-wrap: wrap;
       justify-content: center;
-      margin-top: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
     }
-    .primary {
-      border-color: rgba(197,164,126,0.65);
-      background: rgba(197,164,126,0.10);
+    .cta-btn {
+      border: 1px solid #fff;
+      padding: 1.2rem 3.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.12em;
+      display: inline-block;
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
+      background: transparent;
+    }
+    .cta-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+      background: rgba(197,164,126,0.06);
     }
 
-    /* Footer */
+    /* --- Footer --- */
     footer {
       padding: 5rem 0;
       text-align: center;
       border-top: 1px solid var(--border-color);
     }
     .footer-logo { font-size: 3rem; font-family: 'Cormorant Garamond'; margin-bottom: 2rem; display: block; }
-
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      html.lenis, .lenis.lenis-smooth { scroll-behavior: auto !important; }
-      * { scroll-behavior: auto !important; }
-    }
   </style>
-
-  <!-- JSON-LD（最低限） -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
-    "name": "株式会社YOU",
-    "address": {
-      "@type": "PostalAddress",
-      "postalCode": "169-0072",
-      "addressRegion": "東京都",
-      "addressLocality": "新宿区",
-      "streetAddress": "大久保1丁目12-4 ASS第二ビル 3F"
-    },
-    "telephone": "+81-3-6820-6281"
-  }
-  </script>
 </head>
 
 <body>
@@ -416,54 +269,12 @@
   </div>
 
   <header>
-    <a class="logo en-font" href="#top" aria-label="Go to top">YOU.</a>
-    <div class="menu-btn en-font" id="menuBtn" role="button" tabindex="0" aria-label="Open menu" aria-controls="menuOverlay" aria-expanded="false">
-      MENU <span class="menu-dot" aria-hidden="true"></span>
-    </div>
+    <div class="logo en-font">YOU.</div>
+    <div class="menu-btn en-font">MENU</div>
   </header>
 
-  <!-- Menu Overlay -->
-  <div class="menu-overlay" id="menuOverlay" aria-hidden="true">
-    <div class="menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
-      <div class="menu-head">
-        <div class="en-font" style="letter-spacing:0.2em; color: rgba(255,255,255,0.75);">YOU.</div>
-        <div class="menu-close en-font" id="menuClose" role="button" tabindex="0" aria-label="Close menu">CLOSE</div>
-      </div>
-
-      <nav class="menu-links">
-        <a href="#concept" data-close>
-          <div class="ttl">Concept</div>
-          <div class="sub">思想・提供価値</div>
-        </a>
-        <a href="#services" data-close>
-          <div class="ttl">Services</div>
-          <div class="sub">賃貸 / 売買 / 管理</div>
-        </a>
-        <a href="#company" data-close>
-          <div class="ttl">Company</div>
-          <div class="sub">会社概要・許認可</div>
-        </a>
-        <a href="#contact" data-close>
-          <div class="ttl">Contact</div>
-          <div class="sub">相談・問い合わせ</div>
-        </a>
-      </nav>
-
-      <div class="menu-foot">
-        <div style="margin-top:1.2rem; color: rgba(255,255,255,0.55);">Direct</div>
-        <div class="menu-cta">
-          <a class="btn primary en-font" href="tel:0368206281">CALL</a>
-          <a class="btn en-font" href="mailto:info@you.co.jp?subject=Inquiry%20from%20Website">EMAIL</a>
-        </div>
-        <div style="margin-top:1.2rem; font-size:0.85rem; color: rgba(255,255,255,0.55);">
-          ※メールアドレスは運用に合わせて差し替え
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <main id="top">
-    <section class="hero" aria-label="Hero">
+  <main>
+    <section class="hero">
       <div class="hero-bg">
         <div class="hero-img" data-speed="0.5"></div>
       </div>
@@ -479,7 +290,7 @@
       </div>
     </section>
 
-    <section class="container" id="concept">
+    <section class="container">
       <span class="section-num">01 / Concept</span>
       <div class="concept-layout">
         <div>
@@ -502,25 +313,25 @@
       </div>
     </section>
 
-    <section class="container" id="services">
+    <section class="container">
       <span class="section-num">02 / Services</span>
       <div class="service-list">
-        <div class="service-item reveal-row" tabindex="0" role="button" aria-label="Premium Rental">
+        <div class="service-item reveal-row">
           <span class="svc-name en-font">Premium Rental</span>
           <span class="svc-desc">高級賃貸仲介・コンシェルジュ</span>
         </div>
-        <div class="service-item reveal-row" tabindex="0" role="button" aria-label="Real Estate Sales">
+        <div class="service-item reveal-row">
           <span class="svc-name en-font">Real Estate Sales</span>
           <span class="svc-desc">不動産売買・資産運用</span>
         </div>
-        <div class="service-item reveal-row" tabindex="0" role="button" aria-label="Property Management">
+        <div class="service-item reveal-row">
           <span class="svc-name en-font">Property Management</span>
           <span class="svc-desc">プロパティマネジメント</span>
         </div>
       </div>
     </section>
 
-    <section class="container" id="company">
+    <section class="container">
       <span class="section-num">03 / Company Profile</span>
 
       <div class="cert-container reveal-up">
@@ -536,7 +347,9 @@
 
         <div class="data-grid">
           <div class="data-label">代表取締役</div>
-          <div class="data-val">稲垣 雄也 <span class="en-font" style="font-size:0.9em; opacity:0.6; margin-left:1em;">Yuya Inagaki</span></div>
+          <div class="data-val">
+            稲垣 雄也 <span class="en-font" style="font-size:0.9em; opacity:0.6; margin-left:1em;">Yuya Inagaki</span>
+          </div>
         </div>
 
         <div class="data-grid">
@@ -549,9 +362,7 @@
 
         <div class="data-grid">
           <div class="data-label">電話番号</div>
-          <div class="data-val en-font">
-            <a href="tel:0368206281" aria-label="Call 03-6820-6281">03-6820-6281</a>
-          </div>
+          <div class="data-val en-font">03-6820-6281</div>
         </div>
 
         <div class="data-grid">
@@ -572,55 +383,31 @@
         </div>
       </div>
 
-      <!-- Map: 検索クエリ埋め込み（pb不要） -->
-      <div style="margin-top: 5rem; width: 100%; height: 400px; filter: grayscale(100%); opacity: 0.85;">
+      <div style="margin-top: 5rem; width: 100%; height: 400px; filter: grayscale(100%); opacity: 0.8;">
         <iframe
-          title="YOU office map"
           src="https://www.google.com/maps?q=東京都新宿区大久保1丁目12-4%20ASS第二ビル%203F&output=embed"
-          width="100%" height="100%"
-          style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="YOU Office Map"
+        ></iframe>
       </div>
     </section>
 
-    <section class="container" id="contact" style="text-align: center; padding: 18vh 0;">
-      <h2 class="en-font" style="font-size: clamp(2.6rem, 6vw, 4rem); margin-bottom: 2rem;">Contact Us</h2>
-      <p style="margin-bottom: 3rem; opacity: 0.7; line-height: 2;">
+    <!-- Contact: フォーム削除してCTAだけ残す -->
+    <section class="container" style="text-align: center; padding: 20vh 0;">
+      <h2 class="en-font" style="font-size: 4rem; margin-bottom: 2rem;">Contact Us</h2>
+      <p style="margin-bottom: 2.5rem; opacity: 0.7; line-height: 2;">
         未公開物件も含め、<br />
-        ご要望に合わせた最適なプランをご提案します。
+        お客様のご要望に合わせた最適なプランをご提案いたします。
       </p>
 
-      <div class="contact-wrap reveal-up">
-        <form id="inquiryForm">
-          <div class="contact-grid">
-            <div class="field">
-              <label for="name">NAME</label>
-              <input id="name" name="name" type="text" autocomplete="name" placeholder="お名前" required />
-            </div>
-            <div class="field">
-              <label for="phone">PHONE</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="電話番号（任意）" />
-            </div>
-            <div class="field" style="grid-column: 1 / -1;">
-              <label for="email">EMAIL</label>
-              <input id="email" name="email" type="email" autocomplete="email" placeholder="メールアドレス" required />
-            </div>
-            <div class="field" style="grid-column: 1 / -1;">
-              <label for="msg">MESSAGE</label>
-              <textarea id="msg" name="msg" placeholder="ご相談内容（エリア・予算・希望条件など）" required></textarea>
-            </div>
-          </div>
-
-          <div class="contact-actions">
-            <button type="submit" class="btn primary en-font" style="cursor:pointer;">SEND (Email)</button>
-            <a class="btn en-font" href="tel:0368206281">CALL</a>
-          </div>
-
-          <div style="margin-top:1.2rem; color: rgba(255,255,255,0.55); font-size:0.85rem; line-height:1.9;">
-            ※送信は端末のメールアプリが起動します（サーバー未設定でも運用可）<br />
-            ※本格運用はフォーム送信先（API）接続に差し替え
-          </div>
-        </form>
+      <div class="cta-row">
+        <a class="cta-btn en-font" href="tel:0368206281">CALL</a>
+        <a class="cta-btn en-font" href="mailto:info@you.co.jp">EMAIL</a>
       </div>
     </section>
 
@@ -631,110 +418,55 @@
   </main>
 
   <script>
-    // ===== Menu Overlay =====
-    const menuBtn = document.getElementById('menuBtn');
-    const menuOverlay = document.getElementById('menuOverlay');
-    const menuClose = document.getElementById('menuClose');
-
-    const openMenu = () => {
-      menuOverlay.classList.add('is-open');
-      menuOverlay.setAttribute('aria-hidden', 'false');
-      menuBtn.setAttribute('aria-expanded', 'true');
-    };
-    const closeMenu = () => {
-      menuOverlay.classList.remove('is-open');
-      menuOverlay.setAttribute('aria-hidden', 'true');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    };
-
-    menuBtn.addEventListener('click', openMenu);
-    menuClose.addEventListener('click', closeMenu);
-    menuOverlay.addEventListener('click', (e) => {
-      if (e.target === menuOverlay) closeMenu();
+    // 1. Initialize Lenis (Smooth Scroll)
+    const lenis = new Lenis({
+      duration: 1.5,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true
     });
-    document.querySelectorAll('[data-close]').forEach(a => {
-      a.addEventListener('click', closeMenu);
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    // ===== Inquiry (mailto) =====
-    const form = document.getElementById('inquiryForm');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('msg').value.trim();
-
-      const subject = encodeURIComponent('Inquiry from Website');
-      const body = encodeURIComponent(
-        `【Name】\n${name}\n\n【Email】\n${email}\n\n【Phone】\n${phone || '-'}\n\n【Message】\n${msg}\n`
-      );
-
-      // 運用メールに変更してください
-      window.location.href = `mailto:info@you.co.jp?subject=${subject}&body=${body}`;
-    });
-
-    // ===== Motion preference =====
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // 1) Lenis (disable if reduced motion)
-    let lenis = null;
-    if (!reduceMotion && window.Lenis) {
-      lenis = new Lenis({
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smooth: true
-      });
-      function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+    function raf(time) {
+      lenis.raf(time);
       requestAnimationFrame(raf);
     }
+    requestAnimationFrame(raf);
 
-    // 2) GSAP
-    if (window.gsap && window.ScrollTrigger && !reduceMotion) {
-      gsap.registerPlugin(ScrollTrigger);
+    // 2. GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
 
-      const tl = gsap.timeline();
-      tl.to(".loader-logo", { opacity: 1, duration: 1, ease: "power2.out" })
-        .to(".loader", { height: 0, duration: 1, ease: "power4.inOut", delay: 0.5 })
-        .from(".hero-main-text span", { y: 100, opacity: 0, duration: 1.5, stagger: 0.2, ease: "power4.out" }, "-=0.5")
-        .from(".hero-sub", { height: 0, opacity: 0, duration: 1, ease: "power2.out" }, "-=1");
+    // Loader
+    const tl = gsap.timeline();
+    tl.to(".loader-logo", { opacity: 1, duration: 1, ease: "power2.out" })
+      .to(".loader", { height: 0, duration: 1, ease: "power4.inOut", delay: 0.5 })
+      .from(".hero-main-text span", { y: 100, opacity: 0, duration: 1.5, stagger: 0.2, ease: "power4.out" }, "-=0.5")
+      .from(".hero-sub", { height: 0, opacity: 0, duration: 1, ease: "power2.out" }, "-=1");
 
-      gsap.to(".hero-img", {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+    // Parallax Effect
+    gsap.to(".hero-img", {
+      yPercent: 20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+    // Text Reveal Up
+    gsap.utils.toArray('.reveal-up').forEach(el => {
+      gsap.from(el, {
+        y: 50, opacity: 0, duration: 1.2, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 85%" }
       });
+    });
 
-      gsap.utils.toArray('.reveal-up').forEach(el => {
-        gsap.from(el, {
-          y: 50, opacity: 0, duration: 1.2, ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 85%" }
-        });
+    // Service Row Reveal
+    gsap.utils.toArray('.reveal-row').forEach((el, i) => {
+      gsap.from(el, {
+        x: -30, opacity: 0, duration: 1, delay: i * 0.1, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 90%" }
       });
-
-      gsap.utils.toArray('.reveal-row').forEach((el, i) => {
-        gsap.from(el, {
-          x: -30, opacity: 0, duration: 1, delay: i * 0.1, ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 90%" }
-        });
-      });
-
-      // Parallax for any [data-speed]
-      gsap.utils.toArray('[data-speed]').forEach(el => {
-        gsap.to(el, {
-          y: (i, target) => -ScrollTrigger.maxScroll(window) * Number(target.dataset.speed) * 0.08,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top bottom", end: "bottom top", scrub: 0 }
-        });
-      });
-    } else {
-      // Reduced motion: remove loader instantly
-      const loader = document.querySelector('.loader');
-      if (loader) loader.style.display = 'none';
-    }
+    });
   </script>
 </body>
 </html>
